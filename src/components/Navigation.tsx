@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { 
@@ -14,12 +15,15 @@ import {
 
 const Navigation = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const navigationItems = [
-    { name: "Dashboard", icon: BarChart3, active: true },
-    { name: "Budget", icon: PiggyBank, active: false },
-    { name: "Goals", icon: Target, active: false },
-    { name: "Education", icon: BookOpen, active: false },
+    { name: "Dashboard", icon: BarChart3, active: true, path: "/" },
+    { name: "Add Expense", icon: PiggyBank, active: false, path: "/add-expense" },
+    { name: "Split Bills", icon: Target, active: false, path: "/bill-split" },
+    { name: "Insights", icon: BookOpen, active: false, path: "/insights" },
+    { name: "Goals", icon: Target, active: false, path: "/savings" },
+    { name: "Learn", icon: BookOpen, active: false, path: "/learn" },
   ];
 
   return (
@@ -46,6 +50,7 @@ const Navigation = () => {
                   key={item.name}
                   variant={item.active ? "default" : "ghost"}
                   className="flex items-center space-x-2"
+                  onClick={() => navigate(item.path)}
                 >
                   <IconComponent className="w-4 h-4" />
                   <span>{item.name}</span>
@@ -92,6 +97,7 @@ const Navigation = () => {
                     key={item.name}
                     variant={item.active ? "default" : "ghost"}
                     className="w-full justify-start space-x-2"
+                    onClick={() => navigate(item.path)}
                   >
                     <IconComponent className="w-4 h-4" />
                     <span>{item.name}</span>
